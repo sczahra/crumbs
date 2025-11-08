@@ -1,0 +1,32 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+
+config_version=5
+
+[application]
+config/name="CrumbsDriver"
+run/main_scene="res://scenes/main.tscn"
+
+[autoload]
+GameState="*res://scripts/game_state.gd"
+
+[rendering]
+quality/directional_shadow/size=2048
+textures/vram_compression/import_etc2_astc=true
+
+[input]
+move_forward={"deadzone":0.5,"events":[{"type":"joy_axis","device":-1,"axis":1,"axis_value":-1.0},{"type":"key","keycode":87,"physical":87,"unicode":0},{"type":"key","keycode":4194320,"physical":4194320,"unicode":0}]}
+move_backward={"deadzone":0.5,"events":[{"type":"joy_axis","device":-1,"axis":1,"axis_value":1.0},{"type":"key","keycode":83,"physical":83,"unicode":0},{"type":"key","keycode":4194322,"physical":4194322,"unicode":0}]}
+move_left={"deadzone":0.5,"events":[{"type":"joy_axis","device":-1,"axis":0,"axis_value":-1.0},{"type":"key","keycode":65,"physical":65,"unicode":0},{"type":"key","keycode":4194319,"physical":4194319,"unicode":0}]}
+move_right={"deadzone":0.5,"events":[{"type":"joy_axis","device":-1,"axis":0,"axis_value":1.0},{"type":"key","keycode":68,"physical":68,"unicode":0},{"type":"key","keycode":4194321,"physical":4194321,"unicode":0}]}
+enter_vehicle={"deadzone":0.5,"events":[{"type":"key","keycode":69,"physical":69,"unicode":0}]}
+exit_vehicle={"deadzone":0.5,"events":[{"type":"key","keycode":81,"physical":81,"unicode":0}]}
+toggle_build_mode={"deadzone":0.5,"events":[{"type":"key","keycode":66,"physical":66,"unicode":0}]}
+accelerate={"deadzone":0.5,"events":[{"type":"joy_axis","device":-1,"axis":5,"axis_value":1.0},{"type":"key","keycode":4194320,"physical":4194320,"unicode":0},{"type":"key","keycode":87,"physical":87,"unicode":0}]}
+reverse={"deadzone":0.5,"events":[{"type":"joy_axis","device":-1,"axis":5,"axis_value":-1.0},{"type":"key","keycode":4194322,"physical":4194322,"unicode":0},{"type":"key","keycode":83,"physical":83,"unicode":0}]}
+brake={"deadzone":0.5,"events":[{"type":"joy_axis","device":-1,"axis":2,"axis_value":1.0},{"type":"key","keycode":32,"physical":32,"unicode":32}]}
+steer_left={"deadzone":0.5,"events":[{"type":"joy_axis","device":-1,"axis":0,"axis_value":-1.0},{"type":"key","keycode":65,"physical":65,"unicode":0}]}
+steer_right={"deadzone":0.5,"events":[{"type":"joy_axis","device":-1,"axis":0,"axis_value":1.0},{"type":"key","keycode":68,"physical":68,"unicode":0}]}
+build_confirm={"deadzone":0.5,"events":[{"type":"mouse_button","device":-1,"button_index":1}]}
+build_cycle={"deadzone":0.5,"events":[{"type":"key","keycode":9,"physical":9,"unicode":0}]}

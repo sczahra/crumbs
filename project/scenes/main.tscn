@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://main"]
+
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/vehicle.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/house_piece.tscn" id="3"]
+[ext_resource type="Script" path="res://scripts/house_builder.gd" id="4"]
+[ext_resource type="Script" path="res://scripts/camera_manager.gd" id="5"]
+[ext_resource type="StandardMaterial3D" path="res://materials/ghost_material.tres" id="6"]
+[ext_resource type="StandardMaterial3D" path="res://materials/ground_material.tres" id="7"]
+
+[sub_resource type="Environment" id="1"]
+background_mode = 2
+background_color = Color(0.6, 0.8, 1)
+ambient_light_color = Color(0.58, 0.65, 0.75)
+ambient_light_energy = 1.2
+
+[sub_resource type="BoxMesh" id="2"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="3"]
+size = Vector3(100, 1, 100)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("1")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 10, 0)
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("2")
+material_override = ExtResource("7")
+
+[node name="Player" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Vehicle" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0)
+
+[node name="HouseBuilder" type="Node3D" parent="."]
+script = ExtResource("4")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+ghost_material = ExtResource("6")
+buildable_scenes = Array[PackedScene]([ExtResource("3")])
+
+[node name="CameraRig" type="Node3D" parent="."]
+script = ExtResource("5")
+character_camera_path = NodePath("CharacterCamera")
+vehicle_camera_path = NodePath("VehicleCamera")
+character_offset = Vector3(0, 4, 6)
+vehicle_offset = Vector3(0, 6, 10)
+
+[node name="CharacterCamera" type="Camera3D" parent="CameraRig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 8)
+
+[node name="VehicleCamera" type="Camera3D" parent="CameraRig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 12)
+current = false
