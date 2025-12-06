@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+:root {
+  --bg: #05070d;
+  --panel: rgba(10, 12, 16, 0.72);
+  --text: #e6ecff;
+  --accent: #7dd8ff;
+  --glow: 0 0 30px rgba(125, 216, 255, 0.35);
+  --card: rgba(255, 255, 255, 0.06);
+  --card-border: rgba(255, 255, 255, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(125, 216, 255, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.06), transparent 30%),
+    linear-gradient(135deg, #0a0c12, #05070d 55%, #020306);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+.hero {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+  display: grid;
+  gap: 24px;
+}
+
+.hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.brand .dot {
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #7dd8ff, #6ef7c8);
+  border-radius: 50%;
+  box-shadow: var(--glow);
+}
+
+.title {
+  font-size: 1.1rem;
+}
+
+.stats {
+  display: flex;
+  gap: 12px;
+}
+
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  text-align: center;
+  min-width: 72px;
+  box-shadow: var(--glow);
+}
+
+.stat span {
+  font-weight: 700;
+  display: block;
+  font-size: 1.2rem;
+}
+
+.stat small {
+  opacity: 0.8;
+  letter-spacing: 1px;
+}
+
+.garage {
+  background: var(--panel);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.garage h2 {
+  margin: 0 0 12px;
+  font-size: 1.3rem;
+}
+
+.vehicles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.vehicle-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 12px;
+  cursor: pointer;
+  transition: border 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  display: grid;
+  gap: 8px;
+}
+
+.vehicle-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  filter: saturate(1.05) contrast(1.08);
+}
+
+.vehicle-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow);
+}
+
+.vehicle-card.active {
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+}
+
+.vehicle-card h3 {
+  margin: 0;
+}
+
+.vehicle-card p {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 0.95rem;
+}
+
+.primary {
+  background: linear-gradient(135deg, #7dd8ff, #6ef7c8);
+  color: #071119;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--glow);
+  width: 100%;
+}
+
+.hint {
+  opacity: 0.7;
+  margin-top: 10px;
+}
+
+.game-frame {
+  position: relative;
+  background: linear-gradient(180deg, rgba(15, 18, 24, 0.9), rgba(3, 4, 7, 0.95)),
+    url('https://images.unsplash.com/photo-1518458200997-5c2e0b5a2c2a?auto=format&fit=crop&w=1600&q=80') center/cover;
+  border-radius: 20px;
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+  min-height: 520px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.controls {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  display: flex;
+  gap: 8px;
+}
+
+.controls button {
+  background: var(--panel);
+  border: 1px solid var(--card-border);
+  color: var(--text);
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: var(--glow);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: grid;
+  place-items: center;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 20px 24px;
+  width: min(420px, 90%);
+  text-align: center;
+  box-shadow: var(--glow);
+}
+
+.panel h3 {
+  margin: 0 0 10px;
+}
+
+.panel .result {
+  margin: 0 0 16px;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 16px;
+  }
+
+  .hud {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .controls {
+    bottom: 10px;
+    right: 10px;
+  }
+}

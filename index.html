@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photorealistic Drive</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="hero">
+    <header class="hud">
+      <div class="brand">
+        <span class="dot"></span>
+        <span class="title">Photorealistic Drive</span>
+      </div>
+      <div class="stats">
+        <div class="stat"><span id="speed">0</span><small>km/h</small></div>
+        <div class="stat"><span id="distance">0</span><small>m</small></div>
+      </div>
+    </header>
+    <section class="garage">
+      <h2>Pick your ride</h2>
+      <div class="vehicles" id="vehicleOptions"></div>
+      <button id="startButton" class="primary">Start Driving</button>
+      <p class="hint">Use ← → or tap the on-screen arrows to change lanes.</p>
+    </section>
+    <div class="game-frame">
+      <canvas id="game"></canvas>
+      <div class="controls">
+        <button id="leftControl" aria-label="Move left">◀</button>
+        <button id="rightControl" aria-label="Move right">▶</button>
+      </div>
+      <div class="overlay hidden" id="overlay">
+        <div class="panel">
+          <h3>Race over</h3>
+          <p class="result">You drove <span id="finalDistance">0</span> m</p>
+          <button id="restart" class="primary">Drive again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
