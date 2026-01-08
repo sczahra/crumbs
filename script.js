@@ -5,6 +5,7 @@ const restartButton = document.getElementById('restart');
 const overlay = document.getElementById('overlay');
 const missionPanel = document.getElementById('missionPanel');
 const timerEl = document.getElementById('timer');
+const cellIdEl = document.getElementById('cellId');
 const alertEl = document.getElementById('alert');
 const staminaEl = document.getElementById('stamina');
 const finalTimeEl = document.getElementById('finalTime');
@@ -18,6 +19,7 @@ const gameState = {
   time: 0,
   stamina: 100,
   alert: 0,
+  cell: null,
   player: { x: 0, z: 12, y: 0, heading: 0 },
   guards: [],
   camera: { yaw: Math.PI * 0.35, pitch: 0.35, distance: 28 },
@@ -36,6 +38,7 @@ const world = {
   size: 46,
   structures: [],
   staticFaces: [],
+  cells: [],
   light: normalize({ x: -0.4, y: 0.7, z: -0.5 }),
 };
 
@@ -129,6 +132,7 @@ function addBox({ center, size, color, texture }) {
 
 function buildEnvironment() {
   world.staticFaces = [];
+  world.cells = [];
   const wallHeight = 9;
   const wallThickness = 1.2;
   const size = world.size;
@@ -158,16 +162,54 @@ function buildEnvironment() {
     texture: textures.concrete,
   });
 
+  const cellBlockLength = 32;
+  const cellBlockWidth = 18;
+  const cellBlockHeight = 8;
   addBox({
-    center: [0, 4.2, -28],
-    size: [24, 8.4, 14],
+    center: [0, cellBlockHeight / 2, -22],
+    size: [cellBlockLength, cellBlockHeight, cellBlockWidth],
     color: '#4a4f58',
     texture: textures.concrete,
   });
 
   addBox({
-    center: [18, 3.5, 10],
-    size: [10, 7, 10],
+    center: [0, 1.2, -22],
+    size: [cellBlockLength - 2, 2.4, cellBlockWidth - 2],
+    color: '#2b2f36',
+    texture: textures.asphalt,
+  });
+
+  const corridorZ = -16;
+  const cellDepth = 4;
+  const cellWidth = 4;
+  let cellIndex = 1;
+  for (let x = -14; x <= 14; x += 6) {
+    const leftCellZ = corridorZ - cellDepth;
+    const rightCellZ = corridorZ + cellDepth;
+    const labelLeft = `C-${String(cellIndex).padStart(2, '0')}`;
+    world.cells.push({ id: labelLeft, x, z: leftCellZ - 2 });
+    cellIndex += 1;
+    const labelRight = `C-${String(cellIndex).padStart(2, '0')}`;
+    world.cells.push({ id: labelRight, x, z: rightCellZ + 2 });
+    cellIndex += 1;
+
+    addBox({
+      center: [x, 2.4, leftCellZ],
+      size: [cellWidth, 4.8, cellDepth],
+      color: '#3f444d',
+      texture: textures.metal,
+    });
+    addBox({
+      center: [x, 2.4, rightCellZ],
+      size: [cellWidth, 4.8, cellDepth],
+      color: '#3f444d',
+      texture: textures.metal,
+    });
+  }
+
+  addBox({
+    center: [18, 3.2, 10],
+    size: [12, 6.4, 12],
     color: '#3d4148',
     texture: textures.concrete,
   });
@@ -223,6 +265,12 @@ function createGuards() {
       [-12, -8],
     ]),
   ];
+}
+
+function assignRandomCell() {
+  if (!world.cells.length) return null;
+  const index = Math.floor(Math.random() * world.cells.length);
+  return world.cells[index];
 }
 
 function guard(position, path) {
@@ -553,11 +601,19 @@ function startGame() {
   gameState.time = 0;
   gameState.alert = 0;
   gameState.stamina = 100;
-  gameState.player = { x: 0, z: 12, y: 0, heading: 0 };
+  const assignedCell = assignRandomCell();
+  gameState.cell = assignedCell;
+  gameState.player = {
+    x: assignedCell?.x ?? 0,
+    z: (assignedCell?.z ?? 12) + 2.5,
+    y: 0,
+    heading: 0,
+  };
   gameState.lastTime = null;
   overlay.classList.add('hidden');
   missionPanel.classList.add('hidden');
   createGuards();
+  cellIdEl.textContent = assignedCell?.id ?? 'C-00';
   requestAnimationFrame(gameLoop);
 }
 
@@ -686,6 +742,12 @@ function init() {
   resizeCanvas();
   buildEnvironment();
   createGuards();
+  gameState.cell = assignRandomCell();
+  if (gameState.cell) {
+    cellIdEl.textContent = gameState.cell.id;
+    gameState.player.x = gameState.cell.x;
+    gameState.player.z = gameState.cell.z + 2.5;
+  }
   bindControls();
 
   startButton.addEventListener('click', startGame);
