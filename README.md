@@ -1,19 +1,25 @@
-# Photorealistic Drive
+# Ironhold Prison Sim
 
-A lightweight browser driving game with cinematic, photo-grade visuals. Pick from three distinct vehicles, thread through traffic, and see how far you can travel without a scratch.
+A lightweight, third-person prison simulation built for the browser. Patrol the cell block, keep distance from guards, and survive the yard rotation.
 
 ## Features
-- **Three free, high-quality rides:** choose between the Apex GT coupé, Ridge Trail SUV, or Atlas Carrier truck, each with unique top speeds.
-- **Photorealistic styling:** the game layers premium photography for cars and backgrounds to keep the experience grounded in reality.
-- **Responsive controls:** switch lanes with arrow keys or on-screen buttons while the game scales to desktop or mobile widths.
-- **Quick restarts:** a friendly overlay shows your distance and invites another attempt immediately.
+- **Cell block layout:** explore a structured block with randomized cell assignments each run.
+- **Third-person orbit camera:** drag to orbit the scene while moving through the yard.
+- **Guard patrols & alert system:** stay clear of guards to keep alert levels down.
+- **Touch-ready controls:** on-screen joystick, sprint, and interact controls for mobile play.
 
-## Running the game
-No build tools required. Open `index.html` in any modern browser to start driving.
+## Run the game
+No build tools required. Start a local web server and open the link in your browser:
+
+```bash
+python -m http.server 8000
+```
+
+Then visit: [http://localhost:8000](http://localhost:8000)
 
 ## Controls
-- **Keyboard:** Left/Right arrows to change lanes.
-- **Touch/Mouse:** tap the on-screen ◀ ▶ buttons.
+- **Keyboard:** WASD or arrow keys to move, Shift to sprint.
+- **Touch/Mouse:** use the on-screen joystick, Sprint, and Interact buttons.
 
 ## Asset notes
-All imagery is sourced from free, high-resolution photography available via Unsplash and is loaded at runtime from their CDN. No bundled binaries or proprietary assets are required.
+All visuals are procedurally generated in the canvas renderer. No external assets are required.
