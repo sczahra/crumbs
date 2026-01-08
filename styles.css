@@ -1,13 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-
 :root {
-  --bg: #05070d;
-  --panel: rgba(10, 12, 16, 0.72);
-  --text: #e6ecff;
-  --accent: #7dd8ff;
-  --glow: 0 0 30px rgba(125, 216, 255, 0.35);
-  --card: rgba(255, 255, 255, 0.06);
-  --card-border: rgba(255, 255, 255, 0.12);
+  color-scheme: dark;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #0a0b0f;
+  color: #f5f6f7;
 }
 
 * {
@@ -16,231 +11,249 @@
 
 body {
   margin: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(125, 216, 255, 0.08), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.06), transparent 30%),
-    linear-gradient(135deg, #0a0c12, #05070d 55%, #020306);
-  color: var(--text);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
+  background: radial-gradient(circle at top, #1a1e29 0%, #0a0b0f 70%);
 }
 
-.hero {
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 32px 20px 64px;
-  display: grid;
-  gap: 24px;
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 .hud {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 1.2rem 2rem;
+  background: linear-gradient(135deg, rgba(18, 23, 34, 0.95), rgba(11, 12, 17, 0.9));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  position: sticky;
+  top: 0;
+  z-index: 4;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  gap: 0.9rem;
 }
 
 .brand .dot {
   width: 12px;
   height: 12px;
-  background: linear-gradient(135deg, #7dd8ff, #6ef7c8);
   border-radius: 50%;
-  box-shadow: var(--glow);
+  background: radial-gradient(circle, #f9d976 0%, #b88b2d 55%, #6e531e 100%);
+  box-shadow: 0 0 12px rgba(249, 217, 118, 0.45);
 }
 
 .title {
-  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.subtitle {
+  margin: 0.1rem 0 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
 }
 
 .stats {
   display: flex;
-  gap: 12px;
+  gap: 1rem;
+  text-align: right;
 }
 
 .stat {
-  background: var(--panel);
-  border: 1px solid var(--card-border);
-  border-radius: 12px;
-  padding: 12px 14px;
-  text-align: center;
-  min-width: 72px;
-  box-shadow: var(--glow);
+  display: grid;
+  gap: 0.2rem;
+  min-width: 86px;
 }
 
 .stat span {
-  font-weight: 700;
-  display: block;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
+  font-weight: 600;
 }
 
 .stat small {
-  opacity: 0.8;
-  letter-spacing: 1px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.garage {
-  background: var(--panel);
-  border: 1px solid var(--card-border);
-  border-radius: 18px;
-  padding: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-}
-
-.garage h2 {
-  margin: 0 0 12px;
-  font-size: 1.3rem;
-}
-
-.vehicles {
+.mission {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 14px;
-  margin-bottom: 12px;
+  place-items: center;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(180deg, rgba(10, 11, 15, 0.9), rgba(10, 11, 15, 0.2));
 }
 
-.vehicle-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: 14px;
-  padding: 12px;
-  cursor: pointer;
-  transition: border 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  display: grid;
-  gap: 8px;
+.mission-card {
+  max-width: 720px;
+  background: rgba(17, 22, 32, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
 }
 
-.vehicle-card img {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 10px;
-  filter: saturate(1.05) contrast(1.08);
+.mission-card h2 {
+  margin-top: 0;
+  font-size: 1.6rem;
 }
 
-.vehicle-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--glow);
-}
-
-.vehicle-card.active {
-  border-color: var(--accent);
-  box-shadow: var(--glow);
-}
-
-.vehicle-card h3 {
-  margin: 0;
-}
-
-.vehicle-card p {
-  margin: 0;
-  opacity: 0.8;
-  font-size: 0.95rem;
+.mission-card ul {
+  padding-left: 1.2rem;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .primary {
-  background: linear-gradient(135deg, #7dd8ff, #6ef7c8);
-  color: #071119;
+  margin-top: 1rem;
+  background: linear-gradient(135deg, #f2c66f, #a57c2f);
+  color: #1b1408;
   border: none;
-  border-radius: 12px;
-  padding: 12px 18px;
-  font-weight: 700;
+  border-radius: 999px;
+  padding: 0.8rem 1.8rem;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: var(--glow);
-  width: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.hint {
-  opacity: 0.7;
-  margin-top: 10px;
+.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(242, 198, 111, 0.2);
 }
 
 .game-frame {
   position: relative;
-  background: linear-gradient(180deg, rgba(15, 18, 24, 0.9), rgba(3, 4, 7, 0.95)),
-    url('https://images.unsplash.com/photo-1518458200997-5c2e0b5a2c2a?auto=format&fit=crop&w=1600&q=80') center/cover;
-  border-radius: 20px;
-  border: 1px solid var(--card-border);
-  overflow: hidden;
-  min-height: 520px;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0;
+  background: #08090d;
 }
 
 canvas {
-  display: block;
   width: 100%;
   height: 100%;
+  display: block;
+  background: #0b0c10;
+  touch-action: none;
 }
 
 .controls {
   position: absolute;
-  bottom: 14px;
-  right: 14px;
+  bottom: env(safe-area-inset-bottom);
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
   display: flex;
-  gap: 8px;
+  align-items: flex-end;
+  justify-content: space-between;
+  pointer-events: none;
 }
 
-.controls button {
-  background: var(--panel);
-  border: 1px solid var(--card-border);
-  color: var(--text);
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  box-shadow: var(--glow);
+.joystick {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  pointer-events: auto;
+}
+
+.joystick-base {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 20%, rgba(255, 255, 255, 0.02) 70%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+}
+
+.joystick-stick {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.actions {
+  display: grid;
+  gap: 0.6rem;
+  pointer-events: auto;
+}
+
+.actions button {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  padding: 0.7rem 1.2rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
 }
 
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.65);
   display: grid;
   place-items: center;
+  background: rgba(4, 6, 9, 0.72);
+  backdrop-filter: blur(6px);
+  z-index: 3;
 }
 
 .overlay.hidden {
   display: none;
 }
 
+.hidden {
+  display: none;
+}
+
 .panel {
-  background: var(--panel);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 20px 24px;
-  width: min(420px, 90%);
+  background: rgba(17, 21, 29, 0.95);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem 2.5rem;
   text-align: center;
-  box-shadow: var(--glow);
+  max-width: 360px;
 }
 
 .panel h3 {
-  margin: 0 0 10px;
+  margin-top: 0;
+  font-size: 1.5rem;
 }
 
 .panel .result {
-  margin: 0 0 16px;
-  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.75);
 }
 
-@media (max-width: 640px) {
-  .hero {
-    padding: 16px;
-  }
-
+@media (max-width: 768px) {
   .hud {
     flex-direction: column;
-    gap: 8px;
     align-items: flex-start;
+    gap: 1rem;
   }
 
-  .controls {
-    bottom: 10px;
-    right: 10px;
+  .stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .mission-card {
+    padding: 1.5rem;
   }
 }

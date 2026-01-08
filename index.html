@@ -2,39 +2,70 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Photorealistic Drive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ironhold Prison Sim</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="hero">
+  <div class="app">
     <header class="hud">
       <div class="brand">
         <span class="dot"></span>
-        <span class="title">Photorealistic Drive</span>
+        <div>
+          <p class="title">Ironhold Penitentiary</p>
+          <p class="subtitle">Third-person prison sim</p>
+        </div>
       </div>
       <div class="stats">
-        <div class="stat"><span id="speed">0</span><small>km/h</small></div>
-        <div class="stat"><span id="distance">0</span><small>m</small></div>
+        <div class="stat">
+          <span id="timer">00:00</span>
+          <small>time inside</small>
+        </div>
+        <div class="stat">
+          <span id="alert">Low</span>
+          <small>alert level</small>
+        </div>
+        <div class="stat">
+          <span id="stamina">100</span>
+          <small>stamina</small>
+        </div>
       </div>
     </header>
-    <section class="garage">
-      <h2>Pick your ride</h2>
-      <div class="vehicles" id="vehicleOptions"></div>
-      <button id="startButton" class="primary">Start Driving</button>
-      <p class="hint">Use ← → or tap the on-screen arrows to change lanes.</p>
+
+    <section class="mission" id="missionPanel">
+      <div class="mission-card">
+        <h2>Prison Yard Simulation</h2>
+        <p>
+          You are inmate 408 trying to survive the evening yard rotation. Guards patrol
+          the yard and cellblocks. Stay out of their personal space, keep moving, and
+          make it to lights-out.
+        </p>
+        <ul>
+          <li><strong>Move:</strong> WASD / Arrow keys or the on-screen joystick.</li>
+          <li><strong>Orbit camera:</strong> Drag anywhere on the yard.</li>
+          <li><strong>Sprint:</strong> Hold Shift or tap Sprint.</li>
+        </ul>
+        <button class="primary" id="startButton">Enter the yard</button>
+      </div>
     </section>
+
     <div class="game-frame">
-      <canvas id="game"></canvas>
+      <canvas id="game" aria-label="Prison yard simulation"></canvas>
       <div class="controls">
-        <button id="leftControl" aria-label="Move left">◀</button>
-        <button id="rightControl" aria-label="Move right">▶</button>
+        <div class="joystick" id="joystick">
+          <div class="joystick-base"></div>
+          <div class="joystick-stick" id="joystickStick"></div>
+        </div>
+        <div class="actions">
+          <button id="sprintButton">Sprint</button>
+          <button id="interactButton">Interact</button>
+        </div>
       </div>
       <div class="overlay hidden" id="overlay">
         <div class="panel">
-          <h3>Race over</h3>
-          <p class="result">You drove <span id="finalDistance">0</span> m</p>
-          <button id="restart" class="primary">Drive again</button>
+          <h3>Lights out</h3>
+          <p class="result">You lasted <span id="finalTime">00:00</span> inside the yard.</p>
+          <button id="restart" class="primary">Re-enter the yard</button>
         </div>
       </div>
     </div>
